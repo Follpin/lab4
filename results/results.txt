@@ -1,0 +1,32 @@
+﻿PS C:\Users\ostap\Desktop\lab_4> ./build/lab4.exe
+Lab 4 (Variant 5): Thread-Safe Data Structure (m = 3)
+Total operations: 600000 | Benchmark repeat runs: 5
+Synchronization: 3 separate std::shared_mutex (mtx0_, mtx1_, mtx2_)
+
+1) Checking / generating action files in data/ directory...
+All 18 action files are ready.
+
+2) Benchmark execution (file read time is EXCLUDED):
+
+a) Variant 5 (r0=9%, w0=1%, r1=40%, w1=10%, r2=10%, w2=10%, str=20%)
+  1 thread  (1 x 600000 ops, file data/a_variant5_1t_0.txt): avg time =  117.26 ms
+  2 threads (2 x 300000 ops, files data/a_variant5_2t_0.txt, data/a_variant5_2t_1.txt): avg time =  312.40 ms
+  3 threads (3 x 200000 ops, files data/a_variant5_3t_0.txt, data/a_variant5_3t_1.txt, data/a_variant5_3t_2.txt): avg time =  321.47 ms
+
+b) Equal frequencies (all 7 operations at 1/7 ~= 14.29%)
+  1 thread  (1 x 600000 ops, file data/b_equal_1t_0.txt): avg time =  102.71 ms
+  2 threads (2 x 300000 ops, files data/b_equal_2t_0.txt, data/b_equal_2t_1.txt): avg time =  280.23 ms
+  3 threads (3 x 200000 ops, files data/b_equal_3t_0.txt, data/b_equal_3t_1.txt, data/b_equal_3t_2.txt): avg time =  288.43 ms
+
+c) Unequal mismatch (str=50%, w0=30%, w2=9%, w1=5%, r2=3%, r0=2%, r1=1%)
+  1 thread  (1 x 600000 ops, file data/c_custom_1t_0.txt): avg time =  188.11 ms
+  2 threads (2 x 300000 ops, files data/c_custom_2t_0.txt, data/c_custom_2t_1.txt): avg time =  501.38 ms
+  3 threads (3 x 200000 ops, files data/c_custom_3t_0.txt, data/c_custom_3t_1.txt, data/c_custom_3t_2.txt): avg time =  477.16 ms
+
+Summary Table 3x3 (average execution time for 600000 operations, ms):
+--------------------------------------------------------------------------------
+Action sequence (scenario)                 |   1 thread |  2 threads |  3 threads
+--------------------------------------------------------------------------------
+a) Variant 5 frequencies                   |  117.26 ms |  312.40 ms |  321.47 ms
+b) Equal frequencies (1/7 each)            |  102.71 ms |  280.23 ms |  288.43 ms
+c) Unequal mismatch (str=50%, w=44%)       |  188.11 ms |  501.38 ms |  477.16 ms
